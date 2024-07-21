@@ -1,34 +1,36 @@
 import { defineConfig } from 'electron-vite';
 import vue from '@vitejs/plugin-vue';
-import { join } from 'path';
-
+import { resolve } from 'path';
 
 export default defineConfig({
   main: {
     build: {
+      outDir: 'out/main',
       rollupOptions: {
         external: ['electron']
       },
       lib: {
-        entry: join(__dirname, 'src/main/index.ts')
+        entry: resolve(__dirname, 'src/main/index.ts')
       }
     }
   },
   preload: {
     build: {
+      outDir: 'out/preload',
       rollupOptions: {
         external: ['electron']
       },
       lib: {
-        entry: join(__dirname, 'src/preload/index.ts')
+        entry: resolve(__dirname, 'src/preload/index.ts')
       }
     }
   },
   renderer: {
-    root: join(__dirname, 'src/renderer'),
+    root: resolve(__dirname, 'src/renderer'),
     build: {
+      outDir: 'out/renderer',
       rollupOptions: {
-        input: join(__dirname, 'src/renderer/index.html')
+        input: resolve(__dirname, 'src/renderer/index.html')
       }
     },
     plugins: [vue()]

@@ -25,6 +25,10 @@ contextBridge.exposeInMainWorld('api', {
   }
 })
 
+contextBridge.exposeInMainWorld('electronAPI', {
+  readDirectory: (path: string) => ipcRenderer.invoke('read-directory', path)
+})
+
 // You can also expose variables or functions directly
 contextBridge.exposeInMainWorld('versions', {
   node: () => process.versions.node,
